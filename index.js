@@ -26,7 +26,7 @@ $('#myForm').submit(function(event) {
   // Отправляем данные на сервер
   $.ajax({
     type: 'POST',
-    url: 'server.php', // Замените на адрес вашего сервера
+    url: 'https://formcarry.com/s/zOWGYg-Ual', // Замените на адрес вашего сервера
     data: formData,
     success: function(response) {
       // Действия при успешной отправке данных
