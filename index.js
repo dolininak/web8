@@ -1,22 +1,40 @@
-window.addEventListener('DOMContentLoaded', function (event) {
-console.log("DOM fully loaded and parsed");
-$(document).ready(function(){
-    $('.slider').slick({
-        arrows:true,
-        dots:true,
-        adaptiveHeight:true,
-        slidesToShow:3,
-        slidesToScroll:3,
-        speed:1000,
-        responsive:[
-            {
-                breakpoint:768,
-                settings:{
-                    slidesToShow:1,
-                    slidesToScroll:1,
-                }
-            }
-        ]
-    });
-});
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+  history.pushState({ formIsOpen: true }, "", "#contact-form");
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+  history.pushState({ formIsOpen: false }, "", "/");
+}
+
+window.onpopstate = function(event) {
+  if (event.state && event.state.formIsOpen) {
+    openForm();
+  } else {
+    closeForm();
+  }
+};
+// Обработчик события отправки формы
+$('#myForm').submit(function(event) {
+  // Отменяем стандартное поведение формы
+  event.preventDefault();
+
+  // Получаем данные из формы
+  var formData = $(this).serialize();
+
+  // Отправляем данные на сервер
+  $.ajax({
+    type: 'POST',
+    url: 'server.php', // Замените на адрес вашего сервера
+    data: formData,
+    success: function(response) {
+      // Действия при успешной отправке данных
+      console.log('Данные успешно отправлены');
+    },
+    error: function() {
+      // Действия при ошибке отправки данных
+      console.log('Произошла ошибка при отправке данных');
+    }
+  });
 });
