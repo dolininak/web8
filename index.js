@@ -15,25 +15,17 @@ window.onpopstate = function(event) {
     closeForm();
   }
 };
-// Обработчик события отправки формы
 $('#myForm').submit(function(event) {
-  // Отменяем стандартное поведение формы
   event.preventDefault();
-
-  // Получаем данные из формы
   var formData = $(this).serialize();
-
-  // Отправляем данные на сервер
   $.ajax({
     type: 'POST',
-    url: 'https://formcarry.com/s/zOWGYg-Ual', // Замените на адрес вашего сервера
+    url: 'https://formcarry.com/s/zOWGYg-Ual', 
     data: formData,
     success: function(response) {
-      // Действия при успешной отправке данных
       console.log('Данные успешно отправлены');
     },
     error: function() {
-      // Действия при ошибке отправки данных
       console.log('Произошла ошибка при отправке данных');
     }
   });
